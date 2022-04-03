@@ -1,0 +1,175 @@
+{
+  "Name": "narezka_v3",
+  "Settings": {
+    "TimecodeConfig": {
+      "Source": "ZEROBASED"
+    },
+    "OutputGroups": [
+      {
+        "Name": "File Group",
+        "Outputs": [
+          {
+            "ContainerSettings": {
+              "Container": "MP4",
+              "Mp4Settings": {}
+            },
+            "VideoDescription": {
+              "Width": 1920,
+              "Crop": {
+                "Height": 1080,
+                "Width": 1920,
+                "X": 0,
+                "Y": 420
+              },
+              "Height": 1080,
+              "CodecSettings": {
+                "Codec": "H_264",
+                "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "FramerateDenominator": 1001,
+                  "Bitrate": 10000000,
+                  "FramerateControl": "SPECIFIED",
+                  "RateControlMode": "CBR",
+                  "CodecProfile": "MAIN",
+                  "FramerateNumerator": 30000,
+                  "CodecLevel": "AUTO"
+                }
+              },
+              "ColorMetadata": "IGNORE"
+            },
+            "AudioDescriptions": [
+              {
+                "AudioSourceName": "Audio Selector 1",
+                "CodecSettings": {
+                  "Codec": "AAC",
+                  "AacSettings": {
+                    "Bitrate": 128000,
+                    "RateControlMode": "CBR",
+                    "CodingMode": "CODING_MODE_2_0",
+                    "SampleRate": 48000,
+                    "Specification": "MPEG4"
+                  }
+                }
+              }
+            ],
+            "NameModifier": "_16:9"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "MP4",
+              "Mp4Settings": {}
+            },
+            "VideoDescription": {
+              "Width": 1080,
+              "ScalingBehavior": "STRETCH_TO_OUTPUT",
+              "Crop": {
+                "Height": 1920,
+                "Width": 1080,
+                "X": 420,
+                "Y": 0
+              },
+              "Height": 1920,
+              "CodecSettings": {
+                "Codec": "H_264",
+                "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "FramerateDenominator": 1001,
+                  "Bitrate": 10000000,
+                  "FramerateControl": "SPECIFIED",
+                  "RateControlMode": "CBR",
+                  "CodecProfile": "MAIN",
+                  "FramerateNumerator": 30000,
+                  "CodecLevel": "AUTO",
+                  "QualityTuningLevel": "SINGLE_PASS"
+                }
+              },
+              "ColorMetadata": "IGNORE"
+            },
+            "AudioDescriptions": [
+              {
+                "AudioSourceName": "Audio Selector 1",
+                "CodecSettings": {
+                  "Codec": "AAC",
+                  "AacSettings": {
+                    "Bitrate": 128000,
+                    "RateControlMode": "CBR",
+                    "CodingMode": "CODING_MODE_2_0",
+                    "SampleRate": 48000,
+                    "Specification": "MPEG4"
+                  }
+                }
+              }
+            ],
+            "NameModifier": "_9:16"
+          },
+          {
+            "ContainerSettings": {
+              "Container": "MP4",
+              "Mp4Settings": {}
+            },
+            "VideoDescription": {
+              "Width": 1080,
+              "ScalingBehavior": "STRETCH_TO_OUTPUT",
+              "Crop": {
+                "Height": 1350,
+                "Width": 1080,
+                "X": 420,
+                "Y": 284
+              },
+              "Height": 1350,
+              "CodecSettings": {
+                "Codec": "H_264",
+                "H264Settings": {
+                  "InterlaceMode": "PROGRESSIVE",
+                  "FramerateDenominator": 1001,
+                  "Bitrate": 10000000,
+                  "FramerateControl": "SPECIFIED",
+                  "RateControlMode": "CBR",
+                  "CodecProfile": "MAIN",
+                  "FramerateNumerator": 30000,
+                  "CodecLevel": "AUTO",
+                  "QualityTuningLevel": "SINGLE_PASS"
+                }
+              },
+              "ColorMetadata": "IGNORE"
+            },
+            "AudioDescriptions": [
+              {
+                "CodecSettings": {
+                  "Codec": "AAC",
+                  "AacSettings": {
+                    "Bitrate": 96000,
+                    "CodingMode": "CODING_MODE_2_0",
+                    "SampleRate": 48000
+                  }
+                }
+              }
+            ],
+            "NameModifier": "_4:5"
+          }
+        ],
+        "OutputGroupSettings": {
+          "Type": "FILE_GROUP_SETTINGS",
+          "FileGroupSettings": {}
+        }
+      }
+    ],
+    "Inputs": [
+      {
+        "AudioSelectors": {
+          "Audio Selector 1": {
+            "DefaultSelection": "DEFAULT"
+          }
+        },
+        "VideoSelector": {},
+        "TimecodeSource": "ZEROBASED"
+      }
+    ]
+  },
+  "AccelerationSettings": {
+    "Mode": "DISABLED"
+  },
+  "StatusUpdateInterval": "SECONDS_60",
+  "Priority": 0,
+  "HopDestinations": []
+}
