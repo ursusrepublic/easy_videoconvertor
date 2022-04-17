@@ -19,7 +19,8 @@ CURRENT_FILE = ''
 
 @app.route("/")
 def main_page():
-    return render_template('index.html')
+    return render_template('index.html',
+                           msg_current_file="Not selected")
 
 
 @app.route('/upload', methods=['post'])
@@ -38,7 +39,8 @@ def upload():
 
             return render_template("index.html",
                                    status_color_upload='success',
-                                   msg_upload='File upload success')
+                                   msg_upload='File uploaded',
+                                   msg_current_file=filename)
 
         else:
             return render_template("index.html",
@@ -61,7 +63,9 @@ def create_job():
             cut_end = '0{}'.format(cut_end)
 
         media_converter_client.create_job(CURRENT_FILE, cut_start, cut_end)
-        return render_template("index.html", msg_job='Job sent')
+        return render_template("index.html",
+                               msg_job='Job sent',
+                               msg_current_file=CURRENT_FILE)
 
 
 @app.route('/download', methods=['post'])

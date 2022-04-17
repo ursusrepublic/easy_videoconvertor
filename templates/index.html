@@ -11,12 +11,12 @@
 
 <div class="header">
   <h1>Video converter</h1>
-  <p></p>
+  <p>Target file: {{msg_current_file}}</p>
 </div>
 
 <div class="etl-row">
 
-        <div class="upload-bar">Choose a file to upload<br><br>
+        <div class="upload-bar">Select file to upload<br><br>
         <form action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="file" value="file">
             <hr>
