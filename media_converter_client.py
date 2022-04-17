@@ -11,14 +11,21 @@ converter = boto3.client('mediaconvert',
                          endpoint_url=credentials.aws_mediaconvert_endpoint)
 
 
-def create_job(file_name, cut_start, cut_end):
-    file_path = 's3://input-videostorage/' + file_name
+def make_settings(file_name, cut_start, cut_end):
+    """create .json job settings from template"""
 
     with open('job_templates/cutter.json', 'r') as f:
-        template = json.load(f)
+        settings = json.load(f)
 
-    template['Settings']['Inputs'][0]['FileInput'] = file_path
-    template['Settings']['Inputs'][0]['InputClippings'][0]['StartTimecode'] = '00:00:{};00'.format(cut_start)
-    template['Settings']['Inputs'][0]['InputClippings'][0]['EndTimecode'] = '00:00:{};00'.format(cut_end)
+    file_path = 's3://input-videostorage/' + file_name
+    settings['Settings']['Inputs'][0]['FileInput'] = file_path
+    settings['Settings']['Inputs'][0]['InputClippings'][0]['StartTimecode'] = '00:00:{};00'.format(cut_start)
+    settings['Settings']['Inputs'][0]['InputClippings'][0]['EndTimecode'] = '00:00:{};00'.format(cut_end)
 
-    converter.create_job(**template)
+    return settings
+
+
+def create_job(file_name, cut_start, cut_end):
+    settings = make_settings(file_name, cut_start, cut_end)
+
+    converter.create_job(**settings)

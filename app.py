@@ -54,9 +54,7 @@ def create_job():
     else:
         cut_start = int(request.form['cut_start'])
         cut_end = int(request.form['cut_end'])
-
         # TODO: if cut_end - cut_start < 1 UI error, if cut_end - cut_start < 20 sec UI warning
-
         if cut_start < 10:
             cut_start = '0{}'.format(cut_start)
         if cut_end < 10:
