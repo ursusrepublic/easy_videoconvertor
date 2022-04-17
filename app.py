@@ -75,7 +75,7 @@ def download():
                                status_color_download='error',
                                msg_download='File was not chosen')
     else:
-        s3_client.download_file(CURRENT_FILE)
+        s3_client.download_files(CURRENT_FILE)
         return render_template("index.html",
                                status_color_download='success',
                                msg_download='Downloading')

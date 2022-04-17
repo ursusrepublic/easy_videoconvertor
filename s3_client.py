@@ -41,3 +41,16 @@ def download_file(object_name):
         logging.error(e)
         return False
     return True
+
+
+def download_files(source_filename):
+
+    file_name = source_filename.split('.')[0]
+    file_extension = source_filename.split('.')[1]
+
+    postfixes = ['_1920x1080.', '_1080x1920.', '_1080x1350.']
+    for postfix in postfixes:
+        filename = file_name + postfix + file_extension
+        download_file(filename)
+
+
