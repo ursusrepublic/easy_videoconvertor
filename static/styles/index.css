@@ -51,3 +51,9 @@ img {
 .error {
     color: red;
 }
+
+
+.watcher-table {
+  padding-left: 60px;
+  text-align: left;
+}

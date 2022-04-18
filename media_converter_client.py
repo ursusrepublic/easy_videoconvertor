@@ -31,10 +31,29 @@ def create_job(file_name, cut_start, cut_end):
     mediaconvert.create_job(**settings)
 
 
-def list_jobs():
+def get_jobs_list():
     response = mediaconvert.list_jobs(
         MaxResults=10,
         Order='DESCENDING'
     )
 
     return response
+
+
+def prepare_jobs_table_data():
+
+    table_data = []
+    jobs = get_jobs_list()['Jobs']
+
+    for job in jobs:
+        created_datetime_raw = job['CreatedAt']
+        created_datetime = created_datetime_raw.strftime("%d/%m/%Y, %H:%M:%S")
+        input_filename = job['Settings']['Inputs'][0]['FileInput'].split('/')[3]
+
+        row = job['Id'], created_datetime, input_filename, job['Status']
+        table_data.append(row)
+
+    return table_data
+
+
+prepare_jobs_table_data()

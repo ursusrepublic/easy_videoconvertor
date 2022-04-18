@@ -79,3 +79,11 @@ def download():
         return render_template("index.html",
                                status_color_download='success',
                                msg_download='Downloading')
+
+
+@app.route("/watcher")
+def watcher():
+    jobs_table_data = media_converter_client.prepare_jobs_table_data()
+    print(jobs_table_data)
+    return render_template('watcher.html', jobs_table_data=jobs_table_data)
+
