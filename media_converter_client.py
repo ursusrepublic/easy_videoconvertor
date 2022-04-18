@@ -21,7 +21,6 @@ def make_settings(file_name, cut_start, cut_end):
     settings['Settings']['Inputs'][0]['FileInput'] = file_path
     settings['Settings']['Inputs'][0]['InputClippings'][0]['StartTimecode'] = '00:00:{};00'.format(cut_start)
     settings['Settings']['Inputs'][0]['InputClippings'][0]['EndTimecode'] = '00:00:{};00'.format(cut_end)
-
     return settings
 
 
@@ -36,7 +35,6 @@ def get_jobs_list():
         MaxResults=10,
         Order='DESCENDING'
     )
-
     return response
 
 
@@ -54,6 +52,3 @@ def prepare_jobs_table_data():
         table_data.append(row)
 
     return table_data
-
-
-prepare_jobs_table_data()

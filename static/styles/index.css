@@ -54,6 +54,10 @@ img {
 
 
 .watcher-table {
-  padding-left: 60px;
+    padding-left: 60px;
+}
+
+td, th, tr {
+  padding: 0.3rem;
   text-align: left;
 }
