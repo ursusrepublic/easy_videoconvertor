@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 
 import s3_client
 import media_converter_client
+import form_validators
 
 
 app = Flask(__name__)
@@ -13,7 +14,6 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 MAX_FILE_SIZE_MEGABYTES = 50  # define in megabytes
 app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE_MEGABYTES * 1000 * 1000
 
-ALLOWED_EXTENSIONS = ['mp4']
 
 CURRENT_FILE = ''
 
@@ -32,15 +32,20 @@ def upload():
         if file:
             filename = secure_filename(file.filename)
 
-            s3_client.upload_fileobject(file, filename)
+            if not form_validators.validate_file_extension(filename):
+                return render_template("index.html",
+                                       status_color_upload='error',
+                                       msg_upload=f'File extension must be: {form_validators.allowed_extensions}')
 
-            global CURRENT_FILE
-            CURRENT_FILE = filename
+            else:
+                s3_client.upload_fileobject(file, filename)
 
-            return render_template("index.html",
-                                   status_color_upload='success',
-                                   msg_upload='File uploaded',
-                                   msg_current_file=filename)
+                global CURRENT_FILE
+                CURRENT_FILE = filename
+                return render_template("index.html",
+                                       status_color_upload='success',
+                                       msg_upload='File uploaded',
+                                       msg_current_file=filename)
 
         else:
             return render_template("index.html",
