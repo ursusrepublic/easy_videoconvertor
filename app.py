@@ -8,13 +8,11 @@ import media_converter_client
 
 
 app = Flask(__name__)
-
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+ALLOWED_EXTENSIONS = ['mp4']
 
 CURRENT_FILE = ''
-
-# TODO: validate max size = 1024 * 1024 * 100, validate .extensions
 
 
 @app.route("/")
@@ -27,12 +25,11 @@ def main_page():
 def upload():
 
     if request.method == 'POST':
-        img = request.files['file']
-        if img:
-            filename = secure_filename(img.filename)
-            img.save(filename)
+        file = request.files['file']
+        if file:
+            filename = secure_filename(file.filename)
 
-            s3_client.upload_file(filename)
+            s3_client.upload_fileobject(file, filename)
 
             global CURRENT_FILE
             CURRENT_FILE = filename
@@ -83,6 +80,6 @@ def download():
 
 @app.route("/watcher")
 def watcher():
-    jobs_table_data = media_converter_client.prepare_jobs_table_data()
-    return render_template('watcher.html', jobs_table_data=jobs_table_data)
+    jobs_table = media_converter_client.prepare_jobs_table_data()
+    return render_template('watcher.html', jobs_table=jobs_table)
 

@@ -15,13 +15,10 @@ INPUT_BUCKET = 'input-videostorage'
 OUTPUT_BUCKET = 'output-videostorage'
 
 
-def upload_file(file_name):
+def upload_fileobject(file, object_name):
 
     try:
-        s3.upload_file(
-            Bucket=INPUT_BUCKET,
-            Filename=file_name,
-            Key=file_name)
+        s3.upload_fileobj(file, INPUT_BUCKET, object_name)
 
     except ClientError as e:
         logging.error(e)
