@@ -10,6 +10,9 @@ import media_converter_client
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+MAX_FILE_SIZE_MEGABYTES = 50  # define in megabytes
+app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE_MEGABYTES * 1000 * 1000
+
 ALLOWED_EXTENSIONS = ['mp4']
 
 CURRENT_FILE = ''
@@ -83,3 +86,14 @@ def watcher():
     jobs_table = media_converter_client.prepare_jobs_table_data()
     return render_template('watcher.html', jobs_table=jobs_table)
 
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html')
+
+
+@app.errorhandler(413)
+def request_too_large(e):
+    return render_template('index.html',
+                           status_color_upload='error',
+                           msg_upload=f'File size over {MAX_FILE_SIZE_MEGABYTES} mb limit')
