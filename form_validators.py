@@ -12,6 +12,3 @@ def validate_file_extension(filename):
         return True
     else:
         return False
-
-
-

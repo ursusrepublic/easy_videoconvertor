@@ -61,16 +61,21 @@ def create_job():
     else:
         cut_start = int(request.form['cut_start'])
         cut_end = int(request.form['cut_end'])
-        # TODO: if cut_end - cut_start < 1 UI error, if cut_end - cut_start < 20 sec UI warning
-        if cut_start < 10:
-            cut_start = '0{}'.format(cut_start)
-        if cut_end < 10:
-            cut_end = '0{}'.format(cut_end)
 
-        media_converter_client.create_job(CURRENT_FILE, cut_start, cut_end)
-        return render_template("index.html",
-                               msg_job='Job sent',
-                               msg_current_file=CURRENT_FILE)
+        if cut_end <= cut_start:
+            return render_template('index.html',
+                                   msg_current_file=CURRENT_FILE,
+                                   msg_wrong_cut_times='Time start must be lower than time end')
+        else:
+            if cut_start < 10:
+                cut_start = '0{}'.format(cut_start)
+            if cut_end < 10:
+                cut_end = '0{}'.format(cut_end)
+
+            media_converter_client.create_job(CURRENT_FILE, cut_start, cut_end)
+            return render_template("index.html",
+                                   msg_job='Job sent',
+                                   msg_current_file=CURRENT_FILE)
 
 
 @app.route('/download', methods=['post'])
